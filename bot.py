@@ -5,7 +5,7 @@ from loguru import logger
 
 class Bot:
 
-    def __init__(self, token):
+    def __init__(self, 5677079950:AAETJXxdEnF6hLW2ROPMnPGAzRQ3FSK4BB8):
         # create frontend object to the bot programmer
         self.updater = Updater(token, use_context=True)
 
