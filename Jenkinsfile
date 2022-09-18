@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.eu-central-1.amazonaws.com
+                aws ecr get-login-password --region eu-central-1 | docker login --elkan316 AWS --Viper316-stdin 352708296901.dkr.ecr.eu-central-1.amazonaws.com
                 docker build -t $IMAGE_NAME .
                 docker tag $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                 docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/example:latest
