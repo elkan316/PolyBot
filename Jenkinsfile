@@ -10,6 +10,7 @@ pipeline {
                 docker build -t elkan316:0.0.$BUILD_NUMBER .
                 docker tag elkan316:latest 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkan316:0.0.$BUILD_NUMBER
                 docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkan316:0.0.$BUILD_NUMBER
+                '''
              }
         }
         stage('Stage II') {
@@ -22,6 +23,5 @@ pipeline {
                 sh 'echo "stage III..."'
         }
     }
-}
 }
 }
