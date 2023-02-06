@@ -1,11 +1,15 @@
+import json
+import threading
+import botocore
 from telegram.ext import Updater, MessageHandler, Filters
-from utils import search_download_youtube_video
 from loguru import logger
+import boto3
+from utils import calc_backlog_per_instance
 
 
 class Bot:
 
-    def __init__(self, 5677079950:AAETJXxdEnF6hLW2ROPMnPGAzRQ3FSK4BB8):
+    def __init__(self, token):
         # create frontend object to the bot programmer
         self.updater = Updater(token, use_context=True)
 
@@ -26,10 +30,13 @@ class Bot:
         """Sends video to a chat"""
         context.bot.send_video(chat_id=update.message.chat_id, video=open(file_path, 'rb'), supports_streaming=True)
 
-    def send_text(self, update,  text, quote=False):
+    def send_text(self, update, text, chat_id=None, quote=False):
         """Sends text to a chat"""
-        # retry https://github.com/python-telegram-bot/python-telegram-bot/issues/1124
-        update.message.reply_text(text, quote=quote)
+        if chat_id:
+            self.updater.bot.send_message(chat_id, text=text)
+        else:
+            # retry https://github.com/python-telegram-bot/python-telegram-bot/issues/1124
+            update.message.reply_text(text, quote=quote)
 
 
 class QuoteBot(Bot):
