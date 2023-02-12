@@ -14,7 +14,7 @@ JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "terraform_bot"
 JOB.devops_sys_user = "polybot_key"
 JOB.branch = "main"
-JOB.email_recepients = "mamtata2022@gmail.com" //TODO: add all developers of projects
+JOB.email_recepients = "elkan316@gmail.com" //TODO: add all developers of projects
 
 
 

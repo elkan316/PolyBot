@@ -34,7 +34,7 @@ JOB.project_name = "PolyBot"
 JOB.devops_sys_user = "polybot_key"
 JOB.branch = "main"
 JOB.ssh_key = "ubuntu_ssh"
-JOB.email_recepients = "mamtata2022@gmail.com" //TODO: add all developers of projects
+JOB.email_recepients = "elkan316@gmail.com" //TODO: add all developers of projects
 
 
 
