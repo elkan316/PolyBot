@@ -29,9 +29,9 @@ import groovy.transform.Field
 
 
 
-JOB.git_project_url = "git@github.com:AlexeyMihaylovDev/PolyBot.git"
+JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "PolyBot"
-JOB.devops_sys_user = "my_polybot_key"
+JOB.devops_sys_user = "polybot_key"
 JOB.branch = "main"
 JOB.ssh_key = "ubuntu_ssh"
 JOB.email_recepients = "mamtata2022@gmail.com" //TODO: add all developers of projects
@@ -56,7 +56,7 @@ pipeline {
     agent {
         docker {
             label 'linux'
-            image '352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_jenk_agent:ubuntu'
+            image '352708296901.dkr.ecr.eu-central-1.amazonaws.com/ElkanShay_jenk_agent:ubuntu'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
@@ -66,9 +66,9 @@ pipeline {
         ANSIBLE_HOST_KEY_CHECKING = "False"
         REGISTRY_URL = "352708296901.dkr.ecr.eu-central-1.amazonaws.com"
         REGISTRY_REGION = "eu-central-1"
-        BOT_ECR_NAME = "alexey_bot_client"
-        IMAGE_ID = "${env.REGISTRY_URL}/alexey_bot_client"
-        BOT_EC2_APP_TAG = "alexey-bot"
+        BOT_ECR_NAME = "ElkanShay_jenk_agent_bot_client"
+        IMAGE_ID = "${env.REGISTRY_URL}/ElkanaShay_bot_client"
+        BOT_EC2_APP_TAG = "ElkanaShay_bot_client-bot"
         BOT_EC2_REGION = "eu-central-1"
     }
     stages {
@@ -154,9 +154,9 @@ pipeline {
 //            steps{
 //                script{
 //                    sh '''
-//                    aws s3 cp s3://alexey-backet/.telegramToken   app/.telegramToken
-//                    aws s3 cp s3://alexey-backet/.envfile   app/.envfile
-//                    aws s3 cp s3://alexey-backet/Config2.json   app/Config2.json
+//                    aws s3 cp s3://elkanashayawsbucket/.telegramToken   app/.telegramToken
+//                    aws s3 cp s3://aelkanashayawsbucket/.envfile   app/.envfile
+//                    aws s3 cp s3://elkanashayawsbucket/Config2.json   app/Config2.json
 //                    '''
 //                }
 //            }
@@ -165,8 +165,8 @@ pipeline {
             steps {
                 script {
                     // Clone PolyBot repository.
-                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AlexeyMihaylovDev/PolyBot.git'
-//                    git branch: 'main', url: 'https://github.com/AlexeyMihaylovDev/my_polybot.git'
+                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:Elkan316/PolyBot.git'
+//                    git branch: 'main', url: 'https://github.com/Elkan316/polybot.git'
                     JOB.gitCommitHash = global_gitInfo.getCommitHash(JOB.branch)
                     println("====================${JOB.gitCommitHash}==============")
                 }
