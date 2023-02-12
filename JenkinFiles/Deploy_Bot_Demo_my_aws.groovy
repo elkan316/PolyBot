@@ -31,7 +31,7 @@ import groovy.transform.Field
 
 
 
-JOB.git_project_url = "git@github.com:AlexeyMihaylovDev/PolyBot.git"
+JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "PolyBot"
 JOB.devops_sys_user = "my_polybot_key"
 JOB.branch = "main"
@@ -69,7 +69,7 @@ pipeline {
         REGISTRY_REGION = "eu-central-1"
         BOT_ECR_NAME = "bot_client"
         IMAGE_ID = "${env.REGISTRY_URL}/${env.BOT_ECR_NAME}"
-        BOT_EC2_APP_TAG = "alexey-bot"
+        BOT_EC2_APP_TAG = "elkanashay"
         BOT_EC2_REGION = "eu-central-1"
         ANSIBLE_INVENROTY_PATH = "ansible/botDeploy.yaml"
         PREPAIR_ANSIBLE_INV_PATH = "ansible/prepare_ansible_inv.py"
@@ -160,7 +160,7 @@ pipeline {
             steps {
                 script {
                     // Clone PolyBot repository.
-                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AlexeyMihaylovDev/my_polybot.git'
+                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:Elkan316/polybot.git'
                     JOB.gitCommitHash = global_gitInfo.getCommitHash(JOB.branch)
                     println("====================${JOB.gitCommitHash}==============")
                 }
