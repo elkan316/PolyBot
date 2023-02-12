@@ -10,9 +10,9 @@ import groovy.transform.Field
 @Field JOB = [:]
 
 
-JOB.git_project_url = "git@github.com:AlexeyMihaylovDev/PolyBot.git"
+JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "terraform_bot"
-JOB.devops_sys_user = "my_polybot_key"
+JOB.devops_sys_user = "polybot_key"
 JOB.branch = "main"
 JOB.email_recepients = "mamtata2022@gmail.com" //TODO: add all developers of projects
 
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script {
                     // Clone PolyBot repository.
-                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AlexeyMihaylovDev/my_polybot.git'
+                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:Elkan316/polybot.git'
                     JOB.gitCommitHash = global_gitInfo.getCommitHash(JOB.branch)
                     println("====================${JOB.gitCommitHash}==============")
                 }
