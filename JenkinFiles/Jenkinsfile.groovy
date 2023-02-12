@@ -29,7 +29,7 @@ import groovy.transform.Field
 
 
 
-JOB.git_project_url = "git@github.com:AlexeyMihaylovDev/PolyBot.git"
+JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "PolyBot"
 JOB.devops_sys_user = "bot_user"
 JOB.branch = "deploy"
@@ -129,7 +129,7 @@ pipeline {
                     // Delete Workspace
                     cleanWs()
                     // Clone PolyBot repository.
-                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AlexeyMihaylovDev/PolyBot.git'
+                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:Elkan316/PolyBot.git'
                     JOB.gitCommitHash = global_gitInfo.getCommitHash(JOB.branch)
                     println("====================${JOB.gitCommitHash}==============")
                 }
@@ -153,14 +153,14 @@ pipeline {
 
                     JOB.modules.each { moduleName, moduleDetails ->
                         if (JOB.modules[moduleName]['details'] == "bot") {
-                            sh "docker build -t alexey_bot_client:${JOB.tagName} -f  ${JOB.modules[moduleName]['dockerfile']} ."
-                            sh "docker tag alexey_bot_client:${JOB.tagName} 352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_bot_client:${JOB.tagName}"
-                            sh "docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_bot_client:${JOB.tagName}"
+                            sh "docker build -t elkanashay:${JOB.tagName} -f  ${JOB.modules[moduleName]['dockerfile']} ."
+                            sh "docker tag elkanashay:${JOB.tagName} 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkanashay:${JOB.tagName}"
+                            sh "docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkanashay:${JOB.tagName}"
 
                         } else {
-                            sh "docker build -t alexey_worker:${JOB.tagName} -f  ${JOB.modules[moduleName]['dockerfile']} ."
-                            sh "docker tag alexey_worker:${JOB.tagName} 352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_worker:${JOB.tagName}"
-                            sh "docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_worker:${JOB.tagName}"
+                            sh "docker build -t elkanashay_worker:${JOB.tagName} -f  ${JOB.modules[moduleName]['dockerfile']} ."
+                            sh "docker tag elkanashay_worker_worker:${JOB.tagName} 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkanashay_worker_worker:${JOB.tagName}"
+                            sh "docker push 352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkanashay_worker_worker:${JOB.tagName}"
                         }
 
                     }
@@ -176,7 +176,7 @@ pipeline {
         }
         stage("Generate Ansible Inventory") {
             environment {
-                BOT_EC2_APP_TAG = "alexey-bot"
+                BOT_EC2_APP_TAG = "elkanashay-bot"
                 BOT_EC2_REGION = "eu-central-1"
             }
             steps {
@@ -198,7 +198,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: "${JOB.ssh_key}", usernameVariable: 'ssh_user', keyFileVariable: 'privatekey')]) {
                     sh '''
-           /usr/bin/ansible-playbook botDeploy.yaml --extra-vars "registry_region=$REGISTRY_REGION  registry_url=$REGISTRY_URL bot_image=352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_bot_client:100" --user=${ssh_user} -i hosts --private-key ${privatekey}
+           /usr/bin/ansible-playbook botDeploy.yaml --extra-vars "registry_region=$REGISTRY_REGION  registry_url=$REGISTRY_URL bot_image=352708296901.dkr.ecr.eu-central-1.amazonaws.com/elkanashay_bot_client:100" --user=${ssh_user} -i hosts --private-key ${privatekey}
             '''
                 }
             }
