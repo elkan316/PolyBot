@@ -30,9 +30,9 @@ import groovy.transform.Field
 
 
 
-JOB.git_project_url = "git@github.com:AlexeyMihaylovDev/PolyBot.git"
+JOB.git_project_url = "git@github.com:Elkan316/PolyBot.git"
 JOB.project_name = "PolyBot"
-JOB.devops_sys_user = "my_polybot_key"
+JOB.devops_sys_user = "polybot_key"
 JOB.branch = "main"
 JOB.ssh_key = "ubuntu_ssh"
 JOB.email_recepients = "mamtata2022@gmail.com" //TODO: add all developers of projects
@@ -56,7 +56,7 @@ pipeline {
     }
 
     agent {
-        docker { image '352708296901.dkr.ecr.eu-central-1.amazonaws.com/alexey_jenk_agent:ubuntu'
+        docker { image '352708296901.dkr.ecr.eu-central-1.amazonaws.com/ElkanaShay:ubuntu'
             label 'aws_linux'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock' }
     }
@@ -66,9 +66,9 @@ pipeline {
         ANSIBLE_HOST_KEY_CHECKING = "False"
         REGISTRY_URL = "352708296901.dkr.ecr.eu-central-1.amazonaws.com"
         REGISTRY_REGION = "eu-central-1"
-        BOT_ECR_NAME = "alexey_bot_client"
-        IMAGE_ID = "${env.REGISTRY_URL}/alexey_bot_client"
-        BOT_EC2_APP_TAG = "alexey-bot"
+        BOT_ECR_NAME = "ElkanaShay"
+        IMAGE_ID = "${env.REGISTRY_URL}/ElkanaShay"
+        BOT_EC2_APP_TAG = "elkanashay"
         BOT_EC2_REGION = "eu-central-1"
         ANSIBLE_INVENROTY_PATH = "ansible/botDeploy.yaml"
         PREPAIR_ANSIBLE_INV_PATH = "ansible/prepare_ansible_inv.py"
@@ -159,7 +159,7 @@ pipeline {
             steps {
                 script {
                     // Clone PolyBot repository.
-                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AlexeyMihaylovDev/my_polybot.git'
+                    git branch: "${JOB.branch}", credentialsId: "${JOB.devops_sys_user}", url: 'git@github.com:AElkan316/polybot.git'
                     JOB.gitCommitHash = global_gitInfo.getCommitHash(JOB.branch)
                     println("====================${JOB.gitCommitHash}==============")
                 }
